@@ -1,0 +1,1 @@
+package com.servicehub.repository; import com.servicehub.domain.ServiceRequest; import java.util.*; import org.springframework.data.jpa.repository.JpaRepository; public interface RequestRepository extends JpaRepository<ServiceRequest,UUID>{ List<ServiceRequest> findAllByOrderByUpdatedAtDesc(); }

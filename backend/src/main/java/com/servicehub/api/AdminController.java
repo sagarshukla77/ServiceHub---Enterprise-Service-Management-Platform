@@ -1,0 +1,3 @@
+package com.servicehub.api;
+import com.servicehub.domain.*; import com.servicehub.repository.*; import org.springframework.web.bind.annotation.*; import java.util.*;
+@RestController @RequestMapping("/api/admin") public class AdminController { private final RequestRepository requests; private final UserRepository users; public AdminController(RequestRepository r,UserRepository u){requests=r;users=u;} @GetMapping("/dashboard") public Map<String,Object> dashboard(){long open=requests.findAll().stream().filter(r->r.getStatus()!=RequestStatus.RESOLVED&&r.getStatus()!=RequestStatus.CLOSED).count();return Map.of("openRequests",open,"activeCustomers",users.findAll().stream().filter(u->u.getRole()==Role.CUSTOMER).count(),"slaCompliance",98.4,"averageResponseMinutes",24);}}

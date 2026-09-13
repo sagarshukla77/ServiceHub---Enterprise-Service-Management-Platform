@@ -1,0 +1,3 @@
+package com.servicehub.security;
+import com.servicehub.domain.*; import io.jsonwebtoken.*; import io.jsonwebtoken.security.Keys; import org.springframework.beans.factory.annotation.Value; import org.springframework.stereotype.Service; import java.nio.charset.StandardCharsets; import java.util.*;
+@Service public class JwtService { private final byte[] secret; public JwtService(@Value("${app.jwt.secret}") String s){secret=s.getBytes(StandardCharsets.UTF_8);} public String issue(AppUser u){return Jwts.builder().subject(u.getEmail()).claim("role",u.getRole().name()).signWith(Keys.hmacShaKeyFor(secret)).compact();} public String subject(String token){return Jwts.parser().verifyWith(Keys.hmacShaKeyFor(secret)).build().parseSignedClaims(token).getPayload().getSubject();} }

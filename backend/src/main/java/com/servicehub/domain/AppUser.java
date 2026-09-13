@@ -1,0 +1,3 @@
+package com.servicehub.domain;
+import jakarta.persistence.*; import java.util.UUID;
+@Entity @Table(name="users") public class AppUser { @Id @GeneratedValue private UUID id; @Column(unique=true,nullable=false) private String email; private String passwordHash; private String displayName; @Enumerated(EnumType.STRING) private Role role; public UUID getId(){return id;} public String getEmail(){return email;} public String getPasswordHash(){return passwordHash;} public String getDisplayName(){return displayName;} public Role getRole(){return role;} public void setEmail(String v){email=v;} public void setPasswordHash(String v){passwordHash=v;} public void setDisplayName(String v){displayName=v;} public void setRole(Role v){role=v;} }
